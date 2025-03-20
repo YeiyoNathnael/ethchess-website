@@ -38,7 +38,7 @@ export async function GET(request: Request) {
     response_type: 'code',
     client_id: clientId,
     redirect_uri: callbackUrl,
-    scope: 'preference:read',
+    scope: 'preference:read challenge:write board:play tournament:write', // Added tournament scopes
     code_challenge_method: 'S256',
     code_challenge: challenge
   }).toString();

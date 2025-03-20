@@ -97,6 +97,12 @@ export async function GET(request: Request) {
         user: {
           id: userinfo.id,
           name: userinfo.username,
+          // Store the performance ratings
+          perfs: userinfo.perfs,
+          // Add more fields you might want to use
+          url: userinfo.url,
+          createdAt: userinfo.createdAt,
+          playTime: userinfo.playTime
         },
         accessToken: tokens.access_token
       }),

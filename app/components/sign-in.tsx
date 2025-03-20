@@ -1,15 +1,10 @@
-
-import { signIn } from "@/auth"
- 
 export default function SignIn() {
   return (
-    <form
-      action={async () => {
-        "use server"
-        await signIn("google")
-      }}
+    <a 
+      href="/api/test-lichess" 
+      className="btn btn-ghost text-xl text-black hover:text-blue-500"
     >
-      <button className="btn btn-ghost text-xl text-black hover:text-blue-500" type="submit">Signin with Google</button>
-    </form>
-  )
-} 
+      Sign in with Lichess
+    </a>
+  );
+}

@@ -2,8 +2,10 @@
 
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
-export default function AuthError() {
+// Create a component that uses useSearchParams
+function ErrorContent() {
   const searchParams = useSearchParams();
   const error = searchParams.get('error');
   
@@ -21,5 +23,19 @@ export default function AuthError() {
         Return to Home
       </Link>
     </div>
+  );
+}
+
+// Wrap the component that uses useSearchParams in Suspense
+export default function AuthError() {
+  return (
+    <Suspense fallback={
+      <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+        <h1 className="text-2xl font-bold text-red-600 mb-4">Authentication Error</h1>
+        <p>Loading error details...</p>
+      </div>
+    }>
+      <ErrorContent />
+    </Suspense>
   );
 }

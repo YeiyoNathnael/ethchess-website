@@ -2,6 +2,9 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { config } from '@/lib/config';
 
+// Tell Next.js this page should always be dynamically rendered
+export const dynamic = 'force-dynamic';
+
 // Server action to get the session
 async function getSessionData() {
   // Wrap the cookies access in a try/catch block

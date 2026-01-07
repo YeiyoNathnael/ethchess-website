@@ -49,7 +49,7 @@ const { login, logout } = auth
 			</template>
     </template>
 
-    <UNavigationMenu :items="items" />
+    <UNavigationMenu v-if="isAuthC" :items="items" />
 
   </UHeader>
 </template>

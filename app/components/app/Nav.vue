@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
-
-const route = useRoute()
+import { storeToRefs } from 'pinia'
+import { useLichessAuthStore } from '../../stores/auth'
 
 const items = computed<NavigationMenuItem[]>(() => [
   {
@@ -20,7 +20,14 @@ const items = computed<NavigationMenuItem[]>(() => [
     label: 'Profile',
     class: 'text-2xl'
   }
+
 ])
+
+const auth = useLichessAuthStore()
+const { isAuthC, username } = storeToRefs(auth)
+const { login, logout } = auth
+
+
 </script>
 
 <template>
@@ -30,7 +37,11 @@ const items = computed<NavigationMenuItem[]>(() => [
 			<h1> ETHCHESS</h1>
 	</template>
     <template #right>
-			<button>Join us</button>
+			<UButton v-if="!isAuthC" class = 'mr-2' @click="login">Login</UButton>
+			<template v-else>
+				<UButton class="mr-2">{{ username}}</UButton>
+				<UButton variant="ghost" @click="logout">Logout</UButton>
+			</template>
     </template>
 
     <UNavigationMenu :items="items" />

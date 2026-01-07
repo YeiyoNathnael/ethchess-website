@@ -4,10 +4,10 @@ import { useLichessAuth } from '../composables/use-lichess-auth'
 import type { Me } from '../services/auth'
 
 
+const lichessAuthService = useLichessAuth()
 export const useLichessAuthStore = defineStore('lichessAuth', () => {
 
-	const lichessAuthService = useLichessAuth()
-
+	const loading = ref(true)
 	const lichessMe = useState<Me | null>(() => null)
 
 	const isAuthC = computed(() => !!lichessMe.value)
@@ -16,15 +16,18 @@ export const useLichessAuthStore = defineStore('lichessAuth', () => {
 
 
 	async function init() {
-
-		await lichessAuthService.init()
-		lichessMe.value = lichessAuthService.me ?? null
-
+		try {
+			await lichessAuthService.init()
+			lichessMe.value = lichessAuthService.me ?? null
+		} finally {
+			loading.value = false
+		}
 	}
 
 	async function login() {
-
+		loading.value = true
 		await lichessAuthService.login()
+		loading.value = false
 	}
 	async function logout() {
 
@@ -35,6 +38,7 @@ export const useLichessAuthStore = defineStore('lichessAuth', () => {
 
 	return {
 		lichessMe,
+		loading,
 
 		isAuthC,
 		username,

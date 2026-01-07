@@ -4,7 +4,7 @@ import { useLichessAuthStore } from './stores/auth'
 const auth = useLichessAuthStore()
 
 onMounted(() => {
-	auth.init()
+	 auth.init()
 })
 </script>
 

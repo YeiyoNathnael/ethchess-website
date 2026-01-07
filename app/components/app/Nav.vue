@@ -24,7 +24,7 @@ const items = computed<NavigationMenuItem[]>(() => [
 ])
 
 const auth = useLichessAuthStore()
-const { isAuthC, username } = storeToRefs(auth)
+const { isAuthC, username, loading } = storeToRefs(auth)
 const { login, logout } = auth
 
 
@@ -37,7 +37,12 @@ const { login, logout } = auth
 			<h1> ETHCHESS</h1>
 	</template>
     <template #right>
-			<UButton v-if="!isAuthC" class = 'mr-2' @click="login">Login</UButton>
+			<template v-if="loading">
+				<UButton disabled class="mr-2">
+					<UIcon name="tabler:loader-2" class="animate-spin" />
+				</UButton>
+			</template>
+			<UButton  v-else-if="!isAuthC" class = 'mr-2' @click="login"><span>Login</span></UButton>
 			<template v-else>
 				<UButton class="mr-2">{{ username}}</UButton>
 				<UButton variant="ghost" @click="logout">Logout</UButton>

@@ -48,8 +48,8 @@ const cards = ref([
 <template>
 <UPageHero >
 		<template #title>
-			<h1 class='mt-0 mb-0 text-3xl
-				'>Everything You Need To Excel</h1>
+			<div class='mt-0 mb-0 text-3xl
+				'>Everything You Need To Excel</div>
 		</template>
 		<template #description>
 		<p class = 'mb-0'>Our comprehensive platform provides all the tools and features you need to improve your chess game and connect with the community</p>
